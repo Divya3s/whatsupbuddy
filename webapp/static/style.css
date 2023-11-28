@@ -1,0 +1,102 @@
+.mainbody{
+    border: 1px solid red;
+    background-color:rgb(255, 235, 235);
+    color:red;
+    border-style: double;
+
+    border-radius: 50px;
+
+    padding-top: 50px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+    padding-left: 80px;
+
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 50px;
+    margin-left: 50px;
+
+}
+
+.menu{
+    border: 1px solid red;
+    background-color:rgb(255, 160, 160);
+    color:rgb(255, 0, 0);
+    border-radius: 30px;
+
+    padding-top: 10px;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+
+    font-size: larger;
+    font-style: inherit;
+    font-weight: bold;
+}
+
+.forms1{
+    border: 1px solid red;
+    background-color:rgb(252, 208, 208);
+    color:red;
+    border-radius: 30px;
+
+    padding-top: 10px;
+    padding-right: 200px;
+    padding-bottom: 10px;
+    padding-left: 200px;
+    max-width: 24rem;
+}
+
+/* unvisited link */
+a:link {
+    color: rgb(255, 0, 0);
+  }
+  
+  /* visited link */
+  a:visited {
+    color: rgb(255, 0, 0);
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: rgb(110, 0, 0);
+    
+  }
+  
+  /* selected link */
+a:active {
+  color: rgb(255, 0, 0);
+
+}
+
+.usr {
+  color:red;
+}
+
+.flash {
+  background-color: rgb(255, 181, 135);
+  
+}
+
+.bgwhite {
+  background-color: white;
+}
+
+.commentbody{
+  border: 1px solid red;
+  background-color:rgb(255, 235, 235);
+  color:red;
+  border-style: double;
+
+  border-radius: 50px;
+
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
