@@ -1,0 +1,114 @@
+{% extends 'template.html' %}
+
+{% block header %}
+  <h1>{% block title %} What's Up Buddy? {% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="container mainbody row align-items-center">
+    <div class="container mx-auto" style="width: 900px;">
+      {{ ckeditor.load() }}
+
+     
+      <h2>Add And Update Your Profile</h2>
+  <form method="POST" action="{{ url_for('profileupdate') }}" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    <br><br>
+    <div class="form-group">
+      {{ form.name.label(class="form-control-label") }}
+      {{ form.name(class="form-control form-control-lg", value=profile.name) }}
+      {% for error in form.name.errors %}
+          <small class="form-text text-danger">{{ error }}</small>
+      {% endfor %}
+  </div>
+<br><br>
+    <div class="form-group">
+      {{ form.age.label(class="form-control-label") }}
+      {{ form.age(class="form-control form-control-lg", value=profile.age) }}
+      {% for error in form.age.errors %}
+          <small class="form-text text-danger">{{ error }}</small>
+      {% endfor %}
+  </div>
+  <br><br>
+    <div class="form-group">
+        {{ form.country.label(class="form-control-label") }}
+        {{ form.country(class="form-control form-control-lg", value=profile.country) }}
+        {% for error in form.country.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+    </div>
+    <br><br>
+    <div class="form-group">
+      {{ form.city.label(class="form-control-label") }}
+      {{ form.city(class="form-control form-control-lg", value=profile.city) }}
+      {% for error in form.city.errors %}
+          <small class="form-text text-danger">{{ error }}</small>
+      {% endfor %}
+    </div>
+    <br><br>
+    <div class="form-group">
+        {{ form.education.label(class="form-control-label") }}
+        {{ form.education(class="form-control form-control-lg", value=profile.education) }}
+        {% for error in form.education.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+      </div>
+      <br><br>
+      <div class="form-group">
+        {{ form.hobbies.label(class="form-control-label") }}
+        {{ form.hobbies(class="form-control form-control-lg", value=profile.hobbies) }}
+        {% for error in form.hobbies.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+      </div>
+      <br><br>
+      <div class="form-group">
+        {{ form.fcolour.label(class="form-control-label") }}
+        {{ form.fcolour(class="form-control form-control-lg", value=profile.fcolour) }}
+        {% for error in form.fcolour.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+      </div>
+      <br><br>
+      <div class="form-group">
+        {{ form.skills.label(class="form-control-label") }}
+        {{ form.skills(class="form-control form-control-lg", value=profile.skills) }}
+        {% for error in form.skills.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+      </div>
+      <br><br>
+      <div class="form-group">
+        {{ form.personality.label(class="form-control-label") }}
+        {{ form.personality(class="form-control form-control-lg", value=profile.personality) }}
+        {% for error in form.personality.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+      </div>
+      <br><br>
+      <div class="form-group">
+        {{ form.about.label(class="form-control-label") }}
+        {{ form.about(class="form-control form-control-lg", value=profile.about, rows="6") }}
+        {% for error in form.about.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+      </div>
+      <br><br>
+      <div class="form-group">
+        {{ form.profilepic.label(class="form-control-label") }}
+        {{ form.profilepic(class="form-control form-control-lg", value=profile.profilepic) }}
+        {% for error in form.profilepic.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+      </div>
+      <br><br>
+  {{ form.submit (class="btn btn-outline-danger") }}
+</form>
+<br><br>
+  </div>
+    </div>
+
+    {{ ckeditor.load() }}
+ {{ ckeditor.config(name='about') }}
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'template.html' %}
+
+{% block header %}
+  <h1>{% block title %} What's Up Buddy? {% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="container mainbody row align-items-center">
+  <div class="container mx-auto" style="width: 900px;">
+    {{ ckeditor.load() }}
+
+  <h2>Edit Blog Post</h2>
+  <form method="POST" action="{{ url_for('postupdate', id=post.id) }}">
+    {{ form.hidden_tag() }}
+
+    <div class="form-group">
+        {{ form.title.label(class="form-control-label") }}
+        {{ form.title(class="form-control form-control-lg", value=post.title) }}
+        {% for error in form.title.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+    </div>
+    <br><br>
+    <div class="form-group">
+      {{ form.content.label(class="form-control-label") }}
+      {{ form.content(class="form-control form-control-lg", rows="6", value=post.content) }}
+      {% for error in form.content.errors %}
+          <small class="form-text text-danger">{{ error }}</small>
+      {% endfor %}
+    </div>
+    <br><br>
+    
+      <!-- {{ form.recaptcha }} -->
+    
+    <br><br>
+     <button type="submit" class="btn btn-outline-danger">Update Post</button> 
+   
+</form>
+
+  <br><br>
+  
+</div>
+</div>
+
+{{ ckeditor.load() }}
+ {{ ckeditor.config(name='content') }}
+{% endblock %}

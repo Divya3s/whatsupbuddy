@@ -1,0 +1,105 @@
+<!-- templates/profile.html -->
+{% extends 'template.html' %}
+
+{% block header %}
+  <h1>{% block title %} What's Up Buddy? {% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="container mainbody row align-items-center">
+  <div class="container mx-auto" style="width: 1100px;">
+    <h1>{{ user.username }}'s Profile</h1>
+    <br>
+    <div class="container mainbody row" style="background-color: white;">
+      
+      <br>
+      <h5>Username:&nbsp; &nbsp; {{ user.username }}</h5><br><br>
+    <br>
+      <h5>Registered On:&nbsp; &nbsp; {{ user.date }}</h5><br>
+      <br>
+    <h5>Name:&nbsp; &nbsp; {{ profile.name}}</h5><br><br>
+      <br>
+      <h5>Age:&nbsp; &nbsp; {{ profile.age}}</h5><br><br>
+      <br>
+      <h5>Country:&nbsp; &nbsp; {{ profile.country }}</h5><br><br>
+      <br>
+      <h5>City:&nbsp; &nbsp; {{ profile.city }}</h5><br><br>
+      <br>
+      <h5>Education:&nbsp; &nbsp; {{ profile.education }}</h5><br><br>
+      <br>
+      <h5>Hobbies:&nbsp; &nbsp; {{ profile.hobbies }}</h5><br><br>
+      <br>
+      <h5>Favourite Colour:&nbsp; &nbsp; {{ profile.fcolor }}</h5><br><br>
+      <br>
+      <h5>Skills:&nbsp; &nbsp; {{ profile.skills }}</h5><br><br>
+      <br>
+      <h5>Personality:&nbsp; &nbsp; {{ profile.personality }}</h5><br><br>
+      <br>
+      <h5>About:&nbsp; &nbsp; {{ profile.about }}</h5><br><br>
+    </div>
+
+    <h2>{{ user.username }}'s Posts</h2>
+    <br><br>
+    <h2>Page Number {{ pagination.page }}</h2>
+      {% for post in pagination.items %}
+      {% if user.username == post.writer %}
+      <a href="{{ url_for('postview', id=post.id) }}">
+        <div class="container commentbody row" style="background-color: white;">
+        <p>Posted On: {{ post.date }} </p>
+        <h4><p>{{ post.title }}</p></h4>
+      </div>
+    </a>
+      {% endif %}
+      {% endfor %}
+    
+<!-- pagination -->
+
+<div class="pagination">
+  {% if pagination.has_prev %}
+      <span>
+          <a class='page-number' href="{{ url_for('post', page=pagination.prev_num) }}">
+              <h3>{{ ' <<< Previous ' }}</h3>
+          </a>
+      </span>
+  {% endif %}
+  &nbsp; &nbsp;
+  {% for number in pagination.iter_pages() %}
+      {% if pagination.page != number %}
+          <span>
+                  <a class='page-number'
+                      href="{{ url_for('post', page=number) }}">
+                  <h3>({{  number  }})</h3> &nbsp; &nbsp;
+                  </a>
+          </span>
+      {% else %}
+          <span class='current-page-number'><h3>[[{{ number }}]]</h3></span>
+      {% endif %}
+  {% endfor %}
+  &nbsp; &nbsp;
+  {% if pagination.has_next %}
+      <span>
+          <a class='page-number'
+              href="{{ url_for('post', page=pagination.next_num) }}">
+              <h3>{{ ' Next >>> ' }}</h3>
+          </a>
+      </span>
+
+  {% endif %}
+<br>
+     
+</div>
+{% if user.username!=current_user.username and current_user.is_authenticated %}
+{% if friend %}
+<a class="nav-link" href="{{ url_for('removefriend', friendname=user.username) }}"><button type="button" class="btn btn-outline-danger">Remove This User As Your Friend!</button></a>
+ {% else %}
+ <a class="nav-link" href="{{ url_for('addfriend', friendname=user.username) }}"><button type="button" class="btn btn-outline-danger">Add This User As Your Friend!</button></a>
+ {% endif %}
+{% endif%}
+  </div>
+  
+</div>
+
+
+{{ ckeditor.load() }}
+ {{ ckeditor.config(name='about') }}
+{% endblock %}

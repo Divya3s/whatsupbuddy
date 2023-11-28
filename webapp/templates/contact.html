@@ -1,0 +1,56 @@
+{% extends 'template.html' %}
+{% from '_formhelpers.html' import render_field %}
+
+{% block header %}
+  <h1>{% block title %} What's Up Buddy? {% endblock %}</h1>
+{% endblock %}
+
+{%- for message in get_flashed_messages() %}
+         {{ message }}
+{%- endfor %}
+
+{% block content %}
+<div class="container mainbody row align-items-center">
+  <div class="container mx-auto" style="width: 900px;">
+  <h2>Contact Us</h2>
+  {{ ckeditor.load() }}
+  <form method="POST" action="{{ url_for('contact') }}">
+    {{ form.hidden_tag() }}
+     <div class="form-group">
+      {{ form.name.label(class="form-control-label") }}
+      {{ form.name(class="form-control form-control-lg", placeholder="Enter your Name") }}
+      {% for error in form.name.errors %}
+          <small class="form-text text-danger">{{ error }}</small>
+      {% endfor %}
+          <!--  <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" name="name" required> --> 
+      </div>
+    </br></br>
+      <div class="form-group">
+        <!-- <label for="Email">Email</label>
+        <input type="text" class="form-control" id="email" name="email" required> -->
+        {{ form.email.label(class="form-control-label") }}
+      {{ form.email(class="form-control form-control-lg", placeholder="Enter your Email ID ") }}
+      {% for error in form.email.errors %}
+          <small class="form-text text-danger">{{ error }}</small>
+      {% endfor %}
+    </div>
+  </br></br>
+      <div class="form-group">
+          <!-- <label for="message">Message</label>
+          <textarea class="form-control" id="message" name="message" rows="6" required></textarea> -->
+          {{ form.message.label(class="form-control-label") }}
+      {{ form.message(class="form-control form-control-lg", placeholder="Enter your Message Texts",rows="6") }}
+      {% for error in form.message.errors %}
+          <small class="form-text text-danger">{{ error }}</small>
+      {% endfor %}
+      </div>
+    </br></br>
+      <button type="submit" class="btn btn-outline-danger">Send Message</button>
+  </form>
+  
+</div>
+</div>
+{{ ckeditor.load() }}
+ {{ ckeditor.config(name='message') }}
+{% endblock %}

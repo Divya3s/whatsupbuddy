@@ -1,0 +1,74 @@
+{% extends 'template.html' %}
+
+{% block header %}
+  <h1>{% block title %} What's Up Buddy? {% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="container mainbody row align-items-center">
+  <div class="container mx-auto" style="width: 600px;">
+  <h2>User Registration</h2>
+  <p><br><br>
+  <!-- <form method="POST" action="{{ url_for('register') }}">
+      <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username" name="username" required>
+      </div>
+    </br></br>
+      <div class="form-group">
+        <label for="Email">Email</label>
+        <input type="text" class="form-control" id="email" name="email" required>
+    </div>
+  </br></br>
+      <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" name="password" required>
+      </div>
+    </br></br>
+      <button type="submit" class="btn btn-outline-danger">Register</button>
+  </form> -->
+  <form method="POST" action="{{ url_for('register') }}">
+    {{ form.hidden_tag() }}
+
+    <div class="form-group">
+        {{ form.username.label(class="form-control-label") }}
+        {{ form.username(class="form-control form-control-lg", placeholder="Enter your username") }}
+        {% for error in form.username.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+    </div>
+    <br><br>
+    <div class="form-group">
+      {{ form.email.label(class="form-control-label") }}
+      {{ form.email(class="form-control form-control-lg", placeholder="Enter your Email") }}
+      {% for error in form.email.errors %}
+          <small class="form-text text-danger">{{ error }}</small>
+      {% endfor %}
+    </div>
+    <br><br>
+    <div class="form-group">
+        {{ form.password.label(class="form-control-label") }}
+        {{ form.password(class="form-control form-control-lg", placeholder="Enter your password") }}
+        {% for error in form.password.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+    </div>
+    <br><br>
+    <div class="form-group">
+        {{ form.confirm_password.label(class="form-control-label") }}
+        {{ form.confirm_password(class="form-control form-control-lg", placeholder="Confirm your password") }}
+        {% for error in form.confirm_password.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+    </div>
+    <br><br>
+    <!-- {{ form.recaptcha }} -->
+    <br><br>
+    <button type="submit" class="btn btn-outline-danger">Register</button>
+</form>
+</p>
+  <br><br>
+  <p>Already have an User Account? <a href="{{ url_for('login') }}">Login</a></p>
+</div>
+</div>
+{% endblock %}

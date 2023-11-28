@@ -1,0 +1,14 @@
+{% extends 'template.html' %}
+
+{% block header %}
+  <h1>{% block title %}What's Up Buddy?{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  
+{% endblock %}
+
+
+
+post = Post(title=form.title.data, content=form.content.data, writer=current_user.username, date=datetime.now().strftime("%Y-%m-%d %H:%M"))
+        

@@ -1,0 +1,33 @@
+{% extends 'template.html' %}
+
+{% block header %}
+  <h1>{% block title %} What's Up Buddy? {% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="container mainbody row align-items-center">
+  <div class="container mx-auto" style="width: 600px;">
+  <h2>Reset Password</h2>
+  <br><br>
+  <p>
+    <form method="POST" action="{{ url_for('pwdrecover') }}">
+      {{ form.hidden_tag() }}
+  
+      <div class="form-group">
+          {{ form.email.label(class="form-control-label") }}
+          {{ form.email(class="form-control form-control-lg", placeholder="Enter your email Address to reset password") }}
+          {% for error in form.email.errors %}
+              <small class="form-text text-danger">{{ error }}</small>
+          {% endfor %}
+      </div>
+      <!-- {{ form.recaptcha }} 
+      <br><br>-->
+      <br><br>
+      <button type="submit" class="btn btn-outline-danger">Reset Password</button>
+  </form>
+  </p>
+    <p>Don't have an User Account? <a href="{{ url_for('register') }}">register</a></p>
+    <p>Already have an User Account? <a href="{{ url_for('login') }}">Login</a></p>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends 'template.html' %}
+
+{% block header %}
+
+  <h1>{% block title %} What' Up Buddy? {% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="container mainbody row align-items-center">
+  <div class="container mx-auto" style="width: 900px;">
+    <h3>Guestbook</h3>
+    {{ ckeditor.load() }}
+    <!-- <h3>Post Scrap</h3>
+    <form method="POST" action="{{ url_for('guestbook') }}">
+      <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" name="name" required>
+      </div>
+  </br></br>
+      <div class="form-group">
+          <label for="scrap">Scrap</label>
+          <textarea class="form-control" id="scrap" name="scrap" rows="4" required></textarea>
+      </div>
+    </br></br>
+      <button type="submit" class="btn btn-outline-danger">Post Scrap</button>
+  </form> -->
+  <form method="POST" action="{{ url_for('guestbook') }}">
+    {{ form.hidden_tag() }}
+
+    <div class="form-group">
+        {{ form.name.label(class="form-control-label") }}
+        {{ form.name(class="form-control form-control-lg", placeholder="Enter your Name") }}
+        {% for error in form.name.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+    </div>
+    <br><br>
+    <div class="form-group">
+      {{ form.scrap.label(class="form-control-label") }}
+      {{ form.scrap(class="form-control form-control-lg", placeholder="Enter your Scrap Texts") }}
+      {% for error in form.scrap.errors %}
+          <small class="form-text text-danger">{{ error }}</small>
+      {% endfor %}
+    </div>
+    <br><br>
+    
+      <!-- {{ form.recaptcha }} -->
+    
+    <br><br>
+    <!--   <button type="submit" class="btn btn-outline-danger">Post Scrap</button> -->
+  {{ form.submit (class="btn btn-outline-danger") }}
+</form>
+
+  <br><br>
+  <h2>Page Number {{ pagination.page }}</h2>
+      {% for guestbook in pagination.items %}
+        <div class="container mainbody row" style="background-color: white;">
+          <p>Scrap By: {{ guestbook.name }} &nbsp; &nbsp; &nbsp; On: {{ guestbook.date }} </p>
+          <h4><p>{{ guestbook.scrap }}</p></h4>
+        </div>
+      {% endfor %}
+
+      <!-- pagination -->
+
+      <div class="pagination">
+        {% if pagination.has_prev %}
+            <span>
+                <a class='page-number' href="{{ url_for('guestbook', page=pagination.prev_num) }}">
+                    <h3>{{ ' <<< Previous ' }}</h3>
+                </a>
+            </span>
+        {% endif %}
+        &nbsp; &nbsp;
+        {% for number in pagination.iter_pages() %}
+            {% if pagination.page != number %}
+                <span>
+                        <a class='page-number'
+                            href="{{ url_for('guestbook', page=number) }}">
+                        <h3>({{  number  }})</h3> &nbsp; &nbsp;
+                        </a>
+                </span>
+            {% else %}
+                <span class='current-page-number'><h3>[[{{ number }}]]</h3></span>
+            {% endif %}
+        {% endfor %}
+        &nbsp; &nbsp;
+        {% if pagination.has_next %}
+            <span>
+                <a class='page-number'
+                    href="{{ url_for('guestbook', page=pagination.next_num) }}">
+                    <h3>{{ ' Next >>> ' }}</h3>
+                </a>
+            </span>
+        {% endif %}
+    </div>
+  </div>
+</div>
+
+{{ ckeditor.load() }}
+ {{ ckeditor.config(name='scrap') }}
+
+{% endblock %}
+

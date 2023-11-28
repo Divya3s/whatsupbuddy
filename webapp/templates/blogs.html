@@ -1,0 +1,66 @@
+{% extends 'template.html' %}
+
+{% block header %}
+  <h1>{% block title %} What's Up Buddy? {% endblock %}</h1>
+  <link rel="stylesheet" href="{{ url_for('static', filename='DataTables/datatables.min.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container mainbody row align-items-center">
+  <div class="container mx-auto" style="width: 1100px;">
+
+    <h2>All users Posts</h2>
+    <br>
+    <h4>Page Number {{ pagination.page }}</h4>
+      {% for post in pagination.items %}
+        <div class="container mainbody row" style="background-color: white;">
+        <p>Posted On: {{ post.date }} </p>
+        <p>Posted By: <a href="{{ url_for('userprofile', username=post.writer) }}"> {{ post.writer }} </a></p>
+        <h4><p>{{ post.title }}</p></h4>
+        <br>
+        <a class="nav-link" href="{{ url_for('postview', id=post.id) }}"><button type="button" class="btn btn-outline-danger">View Post</button></a>
+        
+      </div>
+      {% endfor %}
+    
+<!-- pagination -->
+
+<div class="pagination">
+  {% if pagination.has_prev %}
+      <span>
+          <a class='page-number' href="{{ url_for('post', page=pagination.prev_num) }}">
+              <h3>{{ ' <<< Previous ' }}</h3>
+          </a>
+      </span>
+  {% endif %}
+  &nbsp; &nbsp;
+  {% for number in pagination.iter_pages() %}
+      {% if pagination.page != number %}
+          <span>
+                  <a class='page-number'
+                      href="{{ url_for('post', page=number) }}">
+                  <h3>({{  number  }})</h3> &nbsp; &nbsp;
+                  </a>
+          </span>
+      {% else %}
+          <span class='current-page-number'><h3>[[{{ number }}]]</h3></span>
+      {% endif %}
+  {% endfor %}
+  &nbsp; &nbsp;
+  {% if pagination.has_next %}
+      <span>
+          <a class='page-number'
+              href="{{ url_for('post', page=pagination.next_num) }}">
+              <h3>{{ ' Next >>> ' }}</h3>
+          </a>
+      </span>
+
+  {% endif %}
+</div>
+    
+
+  </div>
+</div>
+{% endblock %}
+
+<script src="{{ url_for('static', filename='DataTables/datatables.min.js') }}"></script>

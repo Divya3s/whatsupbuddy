@@ -1,0 +1,46 @@
+{% extends 'template.html' %}
+
+{% block header %}
+  <h1>{% block title %} What's Up Buddy? {% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="container mainbody row align-items-center">
+  <div class="container mx-auto" style="width: 900px;">
+    {{ ckeditor.load() }}
+
+  <h2>Create New Blog Post</h2>
+  <form method="POST" action="{{ url_for('postnew') }}">
+    {{ form.hidden_tag() }}
+
+    <div class="form-group">
+        {{ form.title.label(class="form-control-label") }}
+        {{ form.title(class="form-control form-control-lg", placeholder="Enter Title of Your Post..") }}
+        {% for error in form.title.errors %}
+            <small class="form-text text-danger">{{ error }}</small>
+        {% endfor %}
+    </div>
+    <br><br>
+    <div class="form-group">
+      {{ form.content.label(class="form-control-label") }}
+      {{ form.content(class="form-control form-control-lg", placeholder="Enter Main Texts of Your Post...", rows="6") }}
+      {% for error in form.content.errors %}
+          <small class="form-text text-danger">{{ error }}</small>
+      {% endfor %}
+    </div>
+    <br><br>
+    
+      <!-- {{ form.recaptcha }} -->
+    
+    <br><br>
+    <!--   <button type="submit" class="btn btn-outline-danger">Post Scrap</button> -->
+  {{ form.submit (class="btn btn-outline-danger") }}
+</form>
+
+  <br><br>
+  
+</div>
+</div>
+{{ ckeditor.load() }}
+ {{ ckeditor.config(name='content') }}
+{% endblock %}

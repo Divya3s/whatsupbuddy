@@ -1,0 +1,46 @@
+<!-- templates/profile.html -->
+{% extends 'template.html' %}
+
+{% block header %}
+  <h1>{% block title %} What's Up Buddy? {% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="container mainbody row align-items-center">
+  <div class="container mx-auto" style="width: 1100px;">
+    <div class="container mainbody row bgwhite">
+      <img src="{{ url_for('static', filename='profilepic.png') }}" style="width:600px; height:500px;" >
+
+      <!-- <img src="{{ profile.profilepic }}" width="200px;" height="300px;" > -->
+      <h5>Your Username:&nbsp; &nbsp; {{ current_user.username }}</h5><br><br>
+    <br>
+      <h5>Your Email:&nbsp; &nbsp; {{ current_user.email }}</h5><br><br>
+    <br>
+      <h5>Registered On:&nbsp; &nbsp; {{ current_user.date }}</h5><br><br>
+      <br>
+    <h5>Name:&nbsp; &nbsp; {{ profile.name}}</h5><br><br>
+    <br>
+    <h5>Age:&nbsp; &nbsp; {{ profile.age}}</h5><br><br>
+      <br>
+      <h5>Country:&nbsp; &nbsp; {{ profile.country }}</h5><br><br>
+      <br>
+      <h5>City:&nbsp; &nbsp; {{ profile.city }}</h5><br><br>
+      <br>
+      <h5>Education:&nbsp; &nbsp; {{ profile.education }}</h5><br><br>
+      <br>
+      <h5>Hobbies:&nbsp; &nbsp; {{ profile.hobbies }}</h5><br><br>
+      <br>
+      <h5>Favourite Colour:&nbsp; &nbsp; {{ profile.fcolor }}</h5><br><br>
+      <br>
+      <h5>Skills:&nbsp; &nbsp; {{ profile.skills }}</h5><br><br>
+      <br>
+      <h5>Personality:&nbsp; &nbsp; {{ profile.personality }}</h5><br><br>
+      <br>
+      <h5>About:&nbsp; &nbsp; {{ profile.about }}</h5><br><br>
+      
+    </div>
+    <br>
+    <button type="button" class="btn btn-outline-danger"><a class="nav-link" href="{{ url_for('profileupdate') }}">Update Profile</a></button>
+  </div>
+</div>
+{% endblock %}

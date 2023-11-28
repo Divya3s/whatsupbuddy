@@ -1,0 +1,22 @@
+{% extends 'template.html' %}
+
+{% block header %}
+  <h1>{% block title %}What's Up Buddy?{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="container mainbody row align-items-center">
+    <div class="container mx-auto" style="width: 900px;">
+  
+      
+      {% for friends in pagination.items  %}
+        <div class="container commentbody row" style="background-color: white;">
+        <h3><p><a href="{{ url_for('userprofile', username=friends.friendname) }}"> {{ friends.friendname }}</a> </p></h3>
+          <p> Added On:&nbsp; {{ friends.date }}</p>
+        </div>
+        <br>
+        {% endfor %}
+       
+    </div>
+  </div>
+{% endblock %}

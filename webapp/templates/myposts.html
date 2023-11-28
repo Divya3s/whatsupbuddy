@@ -1,0 +1,74 @@
+{% extends 'template.html' %}
+
+{% block header %}
+  <h1>{% block title %} What's Up Buddy? {% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="container mainbody row align-items-center">
+  <div class="container mx-auto" style="width: 1100px;">
+    
+    <a class="nav-link" href="{{ url_for('postnew') }}"><button type="button" class="btn btn-outline-danger">Post Something New</button></a>
+    <br>
+    <h2>My Posted Articles..</h2>
+    <br>
+    <h2>Page Number {{ pagination.page }}</h2>
+      {% for post in pagination.items %}
+      {% if post.writer == current_user.username %}
+        <div class="container mainbody row" style="background-color: white;">
+        <p>Posted On: {{ post.date }} </p>
+    
+        <h4><p>{{ post.title }}</p></h4>
+        <br>
+        <nav class="navbar navbar-expand-lg justify-content-center">
+            <div class="container-fluid justify-content-center">
+              <div  id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <button type="button" class="btn btn-outline-danger"><a class="nav-link" href="{{ url_for('postview', id=post.id) }}">View Post</a></button>
+                  </li>
+                
+                </ul>
+              </div>
+            </div>
+          </nav>
+         </div>
+      {% endif %}
+      {% endfor %}
+    
+<!-- pagination -->
+
+<div class="pagination">
+  {% if pagination.has_prev %}
+      <span>
+          <a class="page-number" href="{{ url_for('post', page=pagination.prev_num) }}">
+              <h3>{{ ' <<< Previous ' }}</h3>
+          </a>
+      </span>
+  {% endif %}
+  &nbsp; &nbsp;
+  {% for number in pagination.iter_pages() %}
+      {% if pagination.page != number %}
+          <span>
+                  <a class='page-number' href="{{ url_for('post', page=number) }}">
+                  <h3>({{  number  }})</h3> &nbsp; &nbsp;
+                  </a>
+          </span>
+      {% else %}
+          <span class='current-page-number'><h3>[[{{ number }}]]</h3></span>
+      {% endif %}
+  {% endfor %}
+  &nbsp; &nbsp;
+  {% if pagination.has_next %}
+      <span>
+          <a class='page-number'
+              href="{{ url_for('post', page=pagination.next_num) }}">
+              <h3>{{ ' Next >>> ' }}</h3>
+          </a>
+      </span>
+
+  {% endif %}
+</div>
+</div>
+</div>
+{% endblock %}

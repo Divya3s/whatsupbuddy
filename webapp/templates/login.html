@@ -1,0 +1,43 @@
+{% extends 'template.html' %}
+
+{% block header %}
+  <h1>{% block title %} What's Up Buddy?{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="container mainbody row align-items-center">
+  <div class="container mx-auto" style="width: 600px;">
+    <h2>User Login</h2>
+    <p>
+    <form method="POST" action="{{ url_for('login') }}">
+      {{ form.hidden_tag() }}
+  
+      <div class="form-group">
+          {{ form.email.label(class="form-control-label") }}
+          {{ form.email(class="form-control form-control-lg", placeholder="Enter your email ID") }}
+          {% for error in form.email.errors %}
+              <small class="form-text text-danger">{{ error }}</small>
+          {% endfor %}
+      </div>
+      
+      <br><br>
+      <div class="form-group">
+          {{ form.password.label(class="form-control-label") }}
+          {{ form.password(class="form-control form-control-lg", placeholder="Enter your password") }}
+          {% for error in form.password.errors %}
+              <small class="form-text text-danger">{{ error }}</small>
+          {% endfor %}
+      </div>
+      <br><br>
+      <!-- {{ form.recaptcha }} 
+      <br><br>-->
+      <button type="submit" class="btn btn-outline-danger">Login</button>
+  </form>
+  </p>
+
+    <p>Don't have an User Account? <a href="{{ url_for('register') }}">register</a></p>
+    <p>Forgot Password? <a href="{{ url_for('pwdrecover') }}">Reset Password</a></p>
+  
+  </div>
+</div>
+{% endblock %}
